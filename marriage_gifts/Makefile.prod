@@ -1,0 +1,15 @@
+.PHONY: help deploy build
+
+help:
+	@echo "Production deployment commands:"
+	@echo "  make deploy     - Deploy to production"
+	@echo "  make build      - Build production image"
+
+deploy: build
+	@echo "Deploying to production..."
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+build:
+	@echo "Building production image..."
+	docker-compose -f docker-compose.yml build
+	docker-compose -f docker-compose.prod.yml build

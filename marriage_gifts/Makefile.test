@@ -1,0 +1,25 @@
+.PHONY: help test lint format coverage
+
+help:
+	@echo "Testing commands:"
+	@echo "  make test       - Run all tests"
+	@echo "  make lint       - Run linter"
+	@echo "  make format     - Format code"
+	@echo "  make coverage   - Generate coverage report"
+
+test:
+	@echo "Running tests..."
+	pytest -v
+
+lint:
+	@echo "Running linter..."
+	ruff check app/
+	mypy app/
+
+format:
+	@echo "Formatting code..."
+	ruff format app/
+
+coverage:
+	@echo "Generating coverage report..."
+	pytest --cov=app --cov-report=html
